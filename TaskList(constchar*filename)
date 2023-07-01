@@ -1,0 +1,30 @@
+TaskList::TaskList(const char* filename)
+{
+    file_ = filename;//保存文件名
+    std::ifstream file(file_);//通过流读入文件
+    if (!file) {
+        std::cout << "open failed" << endl;; // 文件打开失败
+    }
+    std::string line;
+    while (std::getline(file, line)) {//从文件中一行一行的读取数据
+        std::stringstream ss(line);
+        int begin_t;
+        std::string name;
+        int priority;
+        std::string type;
+        int remind_time;
+
+        // 解析每行的数据
+        if (ss >> begin_t >> name >> priority >> type >> remind_time) {
+            // 创建 Other 对象，并设置属性值
+            Other task;
+            task.name = name;
+            task.priority = priority;
+            task.type = type;
+            task.remind_time = remind_time;
+            // 将任务插入 task_list_
+            task_list_.insert(std::make_pair(begin_t, task));
+            remind_order_list_.push_back(std::make_pair(begin_t, task));
+        }
+        sort(remind_order_list_.begin(), remind_order_list_.end(), RemindOrderCompare);//对任务进行排序
+    }
