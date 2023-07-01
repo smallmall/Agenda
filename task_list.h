@@ -55,6 +55,16 @@ class TaskList {
   vector<pair<int, Other>>::iterator FindTask(string name); // if not found, return task_list_.end()
   void ShowTask(vector<pair<int, Other>>::iterator it);   // TODO ShowTask ShowHead
   void ShowHead();  // print the heading of the task list
+  void ShowTask(map<int, Other>::iterator it) {
+    cout << "--------------------------------------------------------------" << endl;
+        cout << "id：" << it->first << endl;//id
+        cout << "名称：" << it->second.name << endl;
+        cout << "开始时间" << it->second.begin_time << endl;
+        cout << "优先级：" << it->second.priority << endl;
+        cout << "类型：" << it->second.type << endl;
+        cout << "提醒时间：" << it->second.remind_time << endl;
+        cout << "--------------------------------------------------------------" << endl;
+    }
 };
 
 
