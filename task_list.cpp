@@ -119,7 +119,105 @@ vector<pair<int, Other>>::iterator TaskList::FindTask(string name) {
   }
   return task_list_.end();
 }
+void TaskList::modify(int id)
+{
+    vector<pair<int, Other>>::iterator it=FindTask(id);
+    while (1)
+    {
+        cout << "请输入想要改变的日程的信息" << endl;
+        cout << "n-代表name" << endl;
+        cout << "s-代表begin_time" << endl;
+        cout << "r-代表remind_time" << endl;
+        cout << "t-代表type" << endl;
+        cout << "p-代表priority" << endl;
+        char op;
+        cin >> op;
+        string newname, newbegin_t, newremind_t, newtype;
+        int newpriority;
+        switch (op) {
+        case 'n':
+            cout << "请输入新的名字" << endl;
+            cin >> newname;
+            it->second.name = newname;
+            break;
+        case 's':
+            cout << "请输入新的开始时间" << endl;
+            cin >> newbegin_t;
+           // it->second.begin_time = newbegin_t;转化函数
+            break;
+        case 'r':
+            cout << "请输入新的提醒时间" << endl;
+            cin >> newremind_t;
+            //it->second.remind_time = newname;
+            break;
+        case 't':
+            cout << "请输入新的种类" << endl;
+            cin >> newtype;
+            it->second.type = newtype;
+            break;
+        case 'p':
+            cout << "请输入新的优先级(1——表示低，2——表示中，4——表示高）" << endl;
+            cin >> newpriority;
+            if (newpriority == 1 || newpriority == 2 || newpriority == 4)
+                it->second.priority = newpriority;
+            else
+                cout << "不存在该优先级" << endl;
+            break;
+        default:
+            break;
+        }
+    }
+}
 
+void TaskList::modify(string name)
+{
+    vector<pair<int, Other>>::iterator it = FindTask(name);
+    while (1)
+    {
+        cout << "请输入想要改变的日程的信息" << endl;
+        cout << "n-代表name" << endl;
+        cout << "s-代表begin_time" << endl;
+        cout << "r-代表remind_time" << endl;
+        cout << "t-代表type" << endl;
+        cout << "p-代表priority" << endl;
+        char op;
+        cin >> op;
+        string newname, newbegin_t, newremind_t, newtype;
+        int newpriority;
+        switch (op) {
+        case 'n':
+            cout << "请输入新的名字" << endl;
+            cin >> newname;
+            it->second.name = newname;
+            break;
+        case 's':
+            cout << "请输入新的开始时间" << endl;
+            cin >> newbegin_t;
+            // it->second.begin_time = newbegin_t;转化函数
+            break;
+        case 'r':
+            cout << "请输入新的提醒时间" << endl;
+            cin >> newremind_t;
+            //it->second.remind_time = newname;
+            break;
+        case 't':
+            cout << "请输入新的种类" << endl;
+            cin >> newtype;
+            it->second.type = newtype;
+            break;
+        case 'p':
+            cout << "请输入新的优先级(1——表示低，2——表示中，4——表示高）" << endl;
+            cin >> newpriority;
+            if (newpriority == 1 || newpriority == 2 || newpriority == 4)
+                it->second.priority = newpriority;
+            else
+                cout << "不存在该优先级" << endl;
+            break;
+        default:
+            break;
+        }
+    }
+}
 void TaskList::ShowTask(vector<pair<int, Other>>::iterator it) {
   // TODO ShowTask
   cout << it->first << '\t' << it->second.name << '\t' << it->second.begin_time
