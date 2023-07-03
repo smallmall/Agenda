@@ -38,7 +38,8 @@ class TaskList {
   void Show(string* type_range, int start = 0, int end = pow(2, 31) - 1, int priority_range = 7,
             bool (*Compare)(pair<int, Other> task1, pair<int, Other> task2) = LessBegin);
   bool Remind();
-
+  void modify(int id);
+  void modify(string name);
  private:
   // map<int, Other> task_list_; 
   vector<pair<int, Other>> task_list_;
