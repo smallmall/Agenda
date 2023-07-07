@@ -1,11 +1,17 @@
 #include "tools.h"
+#include"file_encrypt.h"
 #include<algorithm>
 #include<sstream>
 #include<stdio.h>
 #include<ctime>
 #include<iomanip>
 #include<iostream>
+#include<fstream>
 #include<regex>
+bool fileExists(const std::string& filename) {
+	std::ifstream file(filename);
+	return file.good();
+}
 void to_lower(std::string& str)
 {
 	std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {
@@ -112,4 +118,26 @@ std::string to_string_t(time_t s)
 	strftime(formatted_time, sizeof(formatted_time), "%Y/%m/%d/%H:%M:%S", timeinfo);
 	return formatted_time;
 }
-
+void generate_txtfiles(std::string& username, std::string& password)
+{
+	if (!fileExists(username))//如果不存在该用户名下面的二进制文件
+	{
+		// 创建txt文件并写入内容
+		std::ofstream file(username + ".txt");
+		if (file.is_open()) {
+			file << "ID" << "\t" << "task_name" << "\t" << "begin_time" << "\t" << "priority";
+			file << "\t" << "type" << "\t" << "remind_time";
+			file.close();
+			printf("文件写入成功\n");
+			//std::remove(username.c_str());
+		}
+		else {
+			printf("create failure\n");
+		}
+	}
+	else
+	{
+		//已经存在
+		DecryptFile(username, username + ".txt", password);
+	}
+}
